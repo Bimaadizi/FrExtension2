@@ -1,0 +1,81 @@
+/* Main page background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+  background: url('main-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Sheet container */
+#sheet-container {
+  background: url('container-bg.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 95%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Section styling */
+.section {
+  background: url('section-bg.png') repeat;
+  background-size: cover;
+  padding: 15px;
+  border-radius: 8px;
+  flex: 1 1 240px;
+  min-width: 240px;
+  box-sizing: border-box;
+}
+
+/* Avatar block */
+.avatar-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.avatar-block img {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+.avatar-block input[type="file"] {
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Section titles */
+.section h2 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #ffd700;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+/* Stat lines */
+.stat,
+.info-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 16px;
+}
+
+/* Label bolding */
+.label {
+  font-weight: bold;
+}
