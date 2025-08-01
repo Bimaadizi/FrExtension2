@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Character Viewer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="sheet-container">
+    <div class="avatar-block section">
+      <img id="avatar" src="avatars/default.png" alt="Avatar" />
+      <input type="file" id="avatar-upload" accept="image/*" />
+      <button id="avatar-reset">Change Avatar</button>
+    </div>
+
+<div class="section">
+  <h2>Stats</h2>
+  <div class="stat"><span class="label">STR:</span> <span id="char-str">--</span></div>
+  <div class="stat"><span class="label">DEX:</span> <span id="char-dex">--</span></div>
+  <div class="stat"><span class="label">CON:</span> <span id="char-con">--</span></div>
+  <div class="stat"><span class="label">INT:</span> <span id="char-int">--</span></div>
+  <div class="stat"><span class="label">WIS:</span> <span id="char-wis">--</span></div>
+  <div class="stat"><span class="label">CHA:</span> <span id="char-cha">--</span></div>
+</div>
+
+
+    <div class="section">
+      <h2>Character Info</h2>
+      <div class="info-line"><span class="label">Name:</span> <span id="char-name">--</span></div>
+      <div class="info-line"><span class="label">Race:</span> <span id="char-race">--</span></div>
+      <div class="info-line"><span class="label">Class:</span> <span id="char-class">--</span></div>
+      <div class="info-line"><span class="label">Alignment:</span> <span id="char-alignment">--</span></div>
+    </div>
+
+    <div class="section">
+      <h2>Leveling</h2>
+      <div class="info-line"><span class="label">Level:</span> <span id="char-level">--</span></div>
+      <div class="info-line"><span class="label">XP:</span> <span id="char-exp">--</span></div>
+      <div class="info-line"><span class="label">HP:</span> <span id="char-hp">--</span></div>
+    </div>
+  </div>
+
+<script src="listener.js"></script>
+</body>
+</html>

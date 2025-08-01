@@ -1,0 +1,11 @@
+Name: Spare the Dying
+Level: 0
+School: Necromancy
+Casting Time: 1 action
+Range: Touch
+Duration: Instantaneous
+Components: V, S
+Classes: Cleric
+
+Description:
+You touch a living creature that has 0 hit points. The creature becomes stable. This spell has no effect on undead or constructs.

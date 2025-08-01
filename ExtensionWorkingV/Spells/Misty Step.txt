@@ -1,0 +1,11 @@
+Name: Misty Step
+Level: 2
+School: Conjuration
+Casting Time: 1 bonus action
+Range: Self
+Duration: Instantaneous
+Components: V
+Classes: Sorcerer, Warlock, Wizard
+
+Description:
+Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see.

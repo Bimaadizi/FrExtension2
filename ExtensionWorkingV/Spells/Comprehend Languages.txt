@@ -1,0 +1,13 @@
+Name: Comprehend Languages
+Level: 1
+School: Divination
+Casting Time: 1 action
+Range: Self
+Duration: 1 hour
+Components: V, S, M
+Material: A pinch of soot and salt.
+Classes: Bard, Sorcerer, Warlock, Wizard
+
+Description:
+For the duration, you understand the literal meaning of any spoken language that you hear. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text.
+This spell doesn't decode secret messages in a text or a glyph, such as an arcane sigil, that isn't part of a written language.

@@ -1,0 +1,248 @@
+/* Base page setup */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+  background: url('main-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Shared button styles */
+#layout-toggle,
+#avatar-toggle {
+  position: absolute;
+  background: rgba(128, 128, 128, 0.6);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Button positions */
+#layout-toggle {
+  top: 10px;
+  left: 10px;
+}
+#avatar-toggle {
+  top: 42px;
+  left: 10px;
+}
+
+/* Reveal on hover */
+body:hover #layout-toggle,
+body:hover #avatar-toggle {
+  opacity: 1;
+}
+
+/* Container */
+#sheet-container {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  height: 95vh;
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+  background: url('container-bg.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+
+/* Layout modes */
+#sheet-container.layout-dynamic {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+#sheet-container.layout-grid {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+#sheet-container.layout-horizontal {
+  grid-template-columns: repeat(4, 1fr);
+  height: 100vh;
+  width: 100%;
+}
+#sheet-container.layout-vertical {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Section blocks */
+.section {
+  background: url('section-bg.jpg') repeat;
+  background-size: cover;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 0;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Avatar */
+.avatar-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+}
+.avatar-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  flex-grow: 1;
+  border-radius: 0;
+}
+
+/* Avatar resizing in horizontal */
+#sheet-container.layout-horizontal .avatar-block {
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  max-height: 100%;
+  padding: 10px;
+}
+#sheet-container.layout-horizontal .avatar-block img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Hide avatar upload buttons */
+#avatar-upload,
+#avatar-reset {
+  display: none;
+}
+
+/* Section headers */
+.section h2 {
+  font-size: clamp(18px, 4vw, 40px);
+  margin: 0 0 10px 0;
+  color: #ffd700;
+}
+
+/* Main text layout */
+.stat,
+.info-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(14px, 3.5vw, 36px);
+  line-height: 1.3;
+  padding: 2px 0;
+  gap: 10px;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+.label {
+  font-weight: bold;
+  white-space: nowrap;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+.stat span:last-child,
+.info-line span:last-child {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 🛠 Horizontal font tightening */
+#sheet-container.layout-horizontal .stat,
+#sheet-container.layout-horizontal .info-line {
+  font-size: clamp(10px, 1.1vw, 16px);
+  gap: 4px;
+}
+#sheet-container.layout-horizontal .section h2 {
+  font-size: clamp(12px, 1.4vw, 18px);
+}
+
+/* 📐 Grid: adaptive scaling */
+#sheet-container.layout-grid .stat,
+#sheet-container.layout-grid .info-line {
+  font-size: clamp(12px, 2vw, 28px);
+}
+#sheet-container.layout-grid .section h2 {
+  font-size: clamp(14px, 2.5vw, 32px);
+}
+
+/* 📏 Vertical: generous but safe */
+#sheet-container.layout-vertical .stat,
+#sheet-container.layout-vertical .info-line {
+  font-size: clamp(16px, 3.5vw, 38px);
+}
+#sheet-container.layout-vertical .section h2 {
+  font-size: clamp(20px, 4.5vw, 42px);
+}
+
+/* Ensure stats grows vertically in vertical mode */
+#sheet-container.layout-vertical .section:nth-child(2) {
+  flex: 0 1 auto;
+}
+#sheet-container.layout-vertical .section:nth-child(3) {
+  flex: 1 1 auto;
+}
+#sheet-container.layout-vertical .section:nth-child(4) {
+  flex: 0 1 auto;
+}
+
+/* Responsive fallback */
+@media (max-aspect-ratio: 3/4) {
+  #sheet-container.layout-dynamic {
+    grid-template-columns: 1fr;
+    height: 100vh;
+  }
+
+  .section {
+    min-height: 22vh;
+  }
+
+  .avatar-block img {
+    height: 100%;
+    max-height: 100%;
+  }
+}
+
+/* Small screens */
+@media (max-width: 400px), (max-height: 400px) {
+  #sheet-container {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .section {
+    padding: 6px;
+  }
+
+  .section h2 {
+    font-size: clamp(14px, 4vw, 22px);
+  }
+
+  .stat,
+  .info-line {
+    font-size: clamp(10px, 3vw, 18px);
+    gap: 6px;
+  }
+}

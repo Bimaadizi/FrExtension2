@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "Forgotten Realms Toolkit",
+  "version": "1.4",
+  "description": "Enables Candlekeep lookup, music themes, and live UI viewer for Forgotten Realms characters.",
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://bimaadizi.github.io/*",
+    "https://janitorai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Toggle Modules"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "ui.html",
+        "Sidebar.js",
+        "style.css",
+        "main-bg.jpg",
+        "container-bg.jpg",
+        "musicbg.jpg",
+        "section-bg.jpg",
+        "Spells/*",
+        "UI.png",
+        "NORMAL.TTF",
+        "Audio.png",
+        "Spellbook.png",
+        "Candlekeep.png",
+        "Journal.png",
+        "avatars/*",
+        "dice-assets/*",
+        "music.js",
+        "spellOverlay.js",
+        "SpellBackground.jpg",
+        "Audio/*",
+      "readme.html",
+      "readme.js",
+      "readme.css",
+      "injectReadme.js",
+      "readmeOverlay.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bimaadizi.github.io/*",
+        "https://janitorai.com/*"
+      ],
+      "js": ["viewer.js", "avataroverlay.js", "journal.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

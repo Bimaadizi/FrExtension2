@@ -1,0 +1,11 @@
+Name: Protection From Energy
+Level: 3
+School: Abjuration
+Casting Time: 1 action
+Range: Touch
+Duration: Up to 1 hour
+Components: V, S
+Classes: Cleric, Druid, Ranger, Sorcerer, Wizard
+
+Description:
+For the duration, the willing creature you touch has resistance to one damage type of your choice: acid, cold, fire, lightning, or thunder.

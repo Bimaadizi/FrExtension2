@@ -1,0 +1,292 @@
+(() => {
+  if (document.getElementById("__readme_overlay")) return;
+
+  const overlay = document.createElement("div");
+  overlay.id = "__readme_overlay";
+  Object.assign(overlay.style, {
+    position: "fixed",
+    top: "0",
+    left: "0",
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "black",
+    zIndex: "999999999",
+    overflow: "hidden",
+    fontFamily: "serif"
+  });
+
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  const slideGroups = [
+    {
+      title: "Introduction",
+      slides: [
+        {
+          content: "Welcome to the Forgotten Realms Toolkit. This interactive readme will guide you through every feature.",
+          position: { x: 275, y: 650, width: 1386, height: 300 } // 🧭 Intro
+        }
+      ]
+    },
+    {
+title: "Candlekeep",
+slides: [
+  {
+    content: `
+      <p style="margin-bottom: 16px;">Candlekeep is a feature of this extension which allows to to quickly look up terms, locations, items, races, and names in a simplified mirror of the Forgotten Realms containing over 45,000 entries. Click or highlight a word/phrase with the extension active, or use the search bar.</p>
+
+      <p style="margin-bottom: 16px;">On the UI Bar/Top Bar you can drag the element to your desired location, you can also drag it to your desired size using the square in the right corner.</p>
+
+      <p style="margin-bottom: 16px;">On the UI bar there is:</p>
+      <ul style="margin-bottom: 16px; padding-left: 20px;">
+        <li><strong>An Enable/Disable toggle:</strong> The blue checkmark indicates if the extension is active. When disabled clicking/highlighting will not search for that word. But the search bar still will.</li>
+        <li><strong>The Search Bar:</strong> Will search for whichever word you are looking for. Features autofill.</li>
+        <li><strong>Minimize Button:</strong> Will minimize the extension. Can be maximized again using the blue + button on the left or using sidebar if it's enabled.</li>
+        <li><strong>X Button:</strong> Clears the current search.</li>
+      </ul>
+
+      <p style="margin-bottom: 16px;">Candlekeep also features a few shortcuts - no other features have shortcuts because I didn't realize how big the scope of this project would become.</p>
+      <ul style="padding-left: 20px;">
+        <li><kbd>Ctrl+M</kbd> - Minimizes/Maximizes</li>
+        <li><kbd>Ctrl+I</kbd> - Enables/Disables extension.</li>
+        <li><kbd>Ctrl+X</kbd> - Clears current entry.</li>
+      </ul>
+    `,
+    position: { x: 840, y: 200, width: 750, height: 700 } // 🧭 Candlekeep
+  }
+]
+
+    },
+    {
+      title: "Character Sheet",
+      slides: [
+        {
+          content: "Manage your character’s stats and gear with real-time overlays.",
+          position: { x: 300, y: 700, width: 1200, height: 250 } // 🧭 Character Sheet
+        }
+      ]
+    },
+    {
+      title: "Music Themes",
+      slides: [
+        {
+          content: "Customize the ambient soundtrack to fit your campaign tone.",
+          position: { x: 600, y: 500, width: 800, height: 300 } // 🧭 Music Themes
+        }
+      ]
+    },
+    {
+      title: "Spell Overlay",
+      slides: [
+        {
+          content: "Visualize spell effects live on your screen as you cast.",
+          position: { x: 500, y: 400, width: 900, height: 350 } // 🧭 Spell Overlay
+        }
+      ]
+    },
+    {
+      title: "Journal",
+      slides: [
+        {
+          content: "Keep your notes, quest logs, and lore entries here.",
+          position: { x: 275, y: 750, width: 1386, height: 250 } // 🧭 Journal
+        }
+      ]
+    },
+    {
+      title: "Sidebar",
+      slides: [
+        {
+          content: "The command center to toggle modules and control features.",
+          position: { x: 350, y: 350, width: 1000, height: 300 } // 🧭 Sidebar
+        }
+      ]
+    },
+    {
+      title: "Complimentary Material",
+      slides: [
+        {
+          content: "Slide 1: Maps, references, and bonus content await.",
+          position: { x: 275, y: 650, width: 1386, height: 300 } // 🧭 CM Slide 1
+        },
+        {
+          content: "Slide 2: Handouts, lore PDFs, and encounter sheets.",
+          position: { x: 500, y: 600, width: 1000, height: 300 } // 🧭 CM Slide 2
+        }
+      ]
+    },
+    {
+      title: "Credits",
+      slides: [
+        {
+          content: "Created by Bimaadizi. Special thanks to contributors.",
+          position: { x: 700, y: 500, width: 600, height: 200 } // 🧭 Credits
+        }
+      ]
+    }
+  ];
+
+  // Flatten for easy navigation
+  const flatSlides = [];
+  const tocMap = [];
+
+  slideGroups.forEach((group, groupIndex) => {
+    group.slides.forEach((slide, slideOffset) => {
+      flatSlides.push({
+        title: group.title,
+        content: slide.content,
+        position: slide.position,
+        groupIndex,
+        slideOffset,
+        isFirstOfGroup: slideOffset === 0
+      });
+      if (slideOffset === 0) tocMap.push(flatSlides.length - 1);
+    });
+  });
+
+  let currentSlide = 0;
+
+  // SVG setup
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("width", "100%");
+  svg.setAttribute("height", "100%");
+  svg.setAttribute("viewBox", "0 0 1920 1080");
+
+  const bg = document.createElementNS(svgNS, "image");
+  bg.setAttributeNS(null, "href", "https://i.imgur.com/pzJsulV.png");
+  bg.setAttribute("x", "0");
+  bg.setAttribute("y", "0");
+  bg.setAttribute("width", "1920");
+  bg.setAttribute("height", "1080");
+
+  const slideGroup = document.createElementNS(svgNS, "g");
+
+  const textBox = document.createElementNS(svgNS, "foreignObject");
+  const html = document.createElement("div");
+  html.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
+  Object.assign(html.style, {
+    height: "100%",
+    overflow: "auto",
+    background: "rgba(0, 0, 0, 0.6)",
+    color: "white",
+    fontSize: "24px",
+    padding: "20px",
+    borderRadius: "10px",
+    boxSizing: "border-box"
+  });
+  textBox.appendChild(html);
+  slideGroup.appendChild(textBox);
+
+  const proceed = document.createElementNS(svgNS, "foreignObject");
+  proceed.setAttribute("x", "1480");
+  proceed.setAttribute("y", "900");
+  proceed.setAttribute("width", "300");
+  proceed.setAttribute("height", "100");
+
+  const proceedBtn = document.createElement("button");
+  proceedBtn.textContent = "Proceed →";
+  proceedBtn.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
+  Object.assign(proceedBtn.style, {
+    fontSize: "24px",
+    padding: "15px 30px",
+    background: "#111",
+    color: "#fff",
+    border: "2px solid white",
+    borderRadius: "10px",
+    cursor: "pointer",
+    width: "100%"
+  });
+
+  proceedBtn.onclick = () => {
+    currentSlide = (currentSlide + 1) % flatSlides.length;
+    renderSlide();
+  };
+
+  proceed.appendChild(proceedBtn);
+  slideGroup.appendChild(proceed);
+
+  svg.appendChild(bg);
+  svg.appendChild(slideGroup);
+
+  // Sidebar nav
+  const sidebar = document.createElement("div");
+  Object.assign(sidebar.style, {
+    position: "fixed",
+    top: "0",
+    left: "0",
+    height: "100vh",
+    width: "220px",
+    background: "#000",
+    color: "#fff",
+    padding: "20px",
+    boxSizing: "border-box",
+    zIndex: "1000000",
+    overflowY: "auto",
+    fontSize: "18px"
+  });
+
+  const title = document.createElement("div");
+  title.textContent = "Table of Contents";
+  title.style.fontSize = "20px";
+  title.style.marginBottom = "20px";
+  title.style.borderBottom = "1px solid #444";
+  sidebar.appendChild(title);
+
+  slideGroups.forEach((group, i) => {
+    const link = document.createElement("div");
+    link.textContent = `${i + 1}. ${group.title}`;
+    link.style.margin = "10px 0";
+    link.style.cursor = "pointer";
+    link.style.color = "#ccc";
+    link.onmouseenter = () => link.style.color = "#fff";
+    link.onmouseleave = () => link.style.color = "#ccc";
+    link.onclick = () => {
+      currentSlide = tocMap[i];
+      renderSlide();
+    };
+    sidebar.appendChild(link);
+  });
+
+  // Close button
+  const closeBtn = document.createElement("button");
+  Object.assign(closeBtn.style, {
+    position: "fixed",
+    top: "20px",
+    right: "20px",
+    fontSize: "18px",
+    padding: "10px 16px",
+    background: "#222",
+    color: "white",
+    border: "2px solid white",
+    cursor: "pointer",
+    borderRadius: "6px",
+    zIndex: "1000001"
+  });
+  closeBtn.textContent = "Close";
+  closeBtn.onclick = () => overlay.remove();
+
+function renderSlide() {
+  const s = flatSlides[currentSlide];
+
+  // Set text box position for current slide
+  textBox.setAttribute("x", s.position.x);
+  textBox.setAttribute("y", s.position.y);
+  textBox.setAttribute("width", s.position.width);
+  textBox.setAttribute("height", s.position.height);
+
+  // 🖼️ Set background image conditionally for slides 2-7 (index 1 to 6)
+  if (currentSlide >= 1 && currentSlide <= 6) {
+    bg.setAttributeNS(null, "href", "https://i.imgur.com/Efc9W3m.png");
+  } else {
+    bg.setAttributeNS(null, "href", "https://i.imgur.com/pzJsulV.png");
+  }
+
+  html.innerHTML = `<h2 style="margin-top:0; color: gold;">${s.title}</h2><p>${s.content}</p>`;
+}
+
+
+  renderSlide();
+  overlay.appendChild(svg);
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(sidebar);
+  document.body.appendChild(overlay);
+})();

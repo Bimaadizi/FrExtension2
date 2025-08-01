@@ -1,0 +1,12 @@
+Name: Barkskin
+Level: 2
+School: Transmutation
+Casting Time: 1 action
+Range: Touch
+Duration: Up to 1 hour
+Components: V, S, M
+Material: A handful of oak bark.
+Classes: Druid, Ranger
+
+Description:
+You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.

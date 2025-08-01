@@ -1,0 +1,12 @@
+Name: Jump
+Level: 1
+School: Transmutation
+Casting Time: 1 action
+Range: Touch
+Duration: 1 minute
+Components: V, S, M
+Material: A grasshopper's hind leg.
+Classes: Druid, Ranger, Sorcerer, Wizard
+
+Description:
+You touch a creature. The creature's jump distance is tripled until the spell ends.
