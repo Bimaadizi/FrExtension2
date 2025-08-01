@@ -5,8 +5,12 @@
   "description": "Enables Candlekeep lookup, music themes, and live UI viewer for Forgotten Realms characters.",
   "permissions": [
     "scripting",
+<<<<<<< HEAD
     "activeTab",
     "storage"
+=======
+    "activeTab"
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
   ],
   "host_permissions": [
     "https://bimaadizi.github.io/*",
@@ -23,12 +27,16 @@
     {
       "resources": [
         "ui.html",
+<<<<<<< HEAD
         "Sidebar.js",
+=======
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
         "style.css",
         "main-bg.jpg",
         "container-bg.jpg",
         "musicbg.jpg",
         "section-bg.jpg",
+<<<<<<< HEAD
         "Spells/*",
         "UI.png",
         "NORMAL.TTF",
@@ -47,6 +55,12 @@
       "readme.css",
       "injectReadme.js",
       "readmeOverlay.js"
+=======
+        "avatars/*",
+        "dice-assets/*",
+        "music.js",
+        "Audio/*"
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
       ],
       "matches": ["<all_urls>"]
     }
@@ -57,7 +71,11 @@
         "https://bimaadizi.github.io/*",
         "https://janitorai.com/*"
       ],
+<<<<<<< HEAD
       "js": ["viewer.js", "avataroverlay.js", "journal.js"],
+=======
+      "js": ["viewer.js", "avataroverlay.js"],
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
       "run_at": "document_idle"
     }
   ]

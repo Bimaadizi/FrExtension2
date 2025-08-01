@@ -28,6 +28,7 @@ const audioFolders = {
 };
 
 const categories = {
+<<<<<<< HEAD
   track: [
     "Beauty", "Boss", "City", "Cold", "Combat", "Desert", "EpicMusic", "Hell",
     "Night", "Ominous", "Religion", "Solemn", "Tavern", "Tension", "Underdark",
@@ -46,11 +47,17 @@ const categories = {
     "StrangersFighting", "Sword", "VagueExclaimations", "Wail", "WaterDripping",
     "Zombie", "None"
   ],
+=======
+  track: ["Beauty", "Boss", "City", "Combat", "EpicMusic", "Night", "Ominous", "Religion", "Solemn", "Tension", "Whimsical", "Wilderness", "None"],
+  background: ["AmbientFire", "Cave", "CityWallaNight", "ConversationWalla", "CrowdedWalla", "Forest", "ForestOminous", "MarketWalla", "RagingFire", "Rain", "Waterfall", "Wind", "None"],
+  soundbite: ["BarkerAdvertiser", "Bartender", "Bat", "Collapsing", "Coughing", "Cow", "Drunkard", "EtherealWhisper", "FarmAnimals", "GhoulGhastGhost", "IndustrialClamor", "MenWorking", "Rat", "Rummaging", "None", "StrangersFighting", "Wail", "WaterDripping", "Zombie"],
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
 };
 
 // 🔥🔥🔥 >>>> UPDATE YOUR VARIANT COUNTS HERE!!! 👇👇👇 <<<< 🔥🔥🔥
 const categoryCounts = {
 track: {
+<<<<<<< HEAD
   Beauty: 2,
   Boss: 2,
   City: 13,
@@ -113,11 +120,63 @@ soundbite: {
   VagueExclaimations: 23,
   WaterDripping: 2,
   Zombie: 25,
+=======
+  Boss: 2,
+  City: 2,
+  Combat: 7,
+  EpicMusic: 4,
+  Night: 4,
+  Ominous: 1,
+  Religion: 4,
+  Solemn: 10,
+  Tension: 10,
+  Whimsical: 2,
+  Wilderness: 8,
+  None: 1,
+},
+background: {
+  AmbientFire: 2,
+  Cave: 8,
+  CityWallaNight: 10,
+  ConversationWalla: 13,
+  CrowdedWalla: 4,
+  Forest: 4,
+  ForestNight: 9,
+  ForestOminous: 1,
+  MarketWalla: 16,
+  RagingFire: 2,
+  rain: 6,
+  Waterfall: 1,
+  Wind: 1,
+  None: 1,
+},
+soundbite: {
+  BarkerAdvertiser: 10,
+  Bartender: 6,
+  Bat: 3,
+  Collapsing: 2,
+  Coughing: 3,
+  Drunkard: 7,
+  EtherealWhisper: 6,
+  FarmAnimals: 7,
+  GhoulGhasts: 29,
+  IndustrialClamor: 9,
+  MenWorking: 18,
+  Monster: 2,
+  Rat: 4,
+  Rummaging: 7,
+  StrangersFighting: 2,
+  Wail: 1,
+  WaterDripping: 2,
+  Zombie: 8,
+  None: 1
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
 },
 };
 // 🔥🔥🔥 >>>> END OF VARIANT COUNT ZONE 😎 <<<< 🔥🔥🔥
 
 function getAudioTagMatches() {
+<<<<<<< HEAD
   const regex = /\b(ost|bg|sb)_(\w+)\b/gi;
   const paragraphs = Array.from(document.querySelectorAll("p, span, div"));
   const found = { track: null, background: null, soundbite: null };
@@ -135,6 +194,24 @@ function getAudioTagMatches() {
   });
 
   return (found.track || found.background || found.soundbite) ? found : null;
+=======
+  const regex = /\[\[\[?AUDIO:([^\]]+)\]\]?\]/gi;
+  const paragraphs = Array.from(document.querySelectorAll("p, span, div"));
+  const matches = [];
+
+  paragraphs.forEach(p => {
+    const match = regex.exec(p.textContent);
+    if (match) {
+      const parsed = Object.fromEntries(match[1].split(';').map(pair => {
+        const [k, v] = pair.split('=');
+        return [k.trim().toLowerCase(), v.trim()];
+      }));
+      matches.push(parsed);
+    }
+  });
+
+  return matches.length > 0 ? matches[matches.length - 1] : null;
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
 }
 
 function getAvailableTracks(type, category) {

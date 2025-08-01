@@ -13,12 +13,18 @@ function toggleScript(tabId, scriptFile, isEnabled, markerId) {
         if (id === "fr-wiki-box") window.__fr_wiki_active = false;
         if (id === "fr-ui-box") window.__fr_ui_active = false;
         if (id === "fr-music-box") {
+<<<<<<< HEAD
           if (window.__music_cleanup) window.__music_cleanup();
           window.__fr_music_active = false;
         }
         if (id === "fr-spell-box") window.__fr_spell_active = false;
         if (id === "custom-sidebar-frame") window.__fr_sidebar_active = false;
         if (id === "journal-root") window.__journal_active = false;
+=======
+          if (window.__music_cleanup) window.__music_cleanup(); // optional hook
+          window.__fr_music_active = false;
+        }
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
       },
       args: [markerId]
     });
@@ -40,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("enableMusic").addEventListener("change", (e) => {
       toggleScript(tabId, "music.js", e.target.checked, "fr-music-box");
     });
+<<<<<<< HEAD
 
     document.getElementById("enableSpells").addEventListener("change", (e) => {
       toggleScript(tabId, "spellOverlay.js", e.target.checked, "fr-spell-box");
@@ -60,5 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         files: ["readme.js"]
       });
     });
+=======
+>>>>>>> 77dcb1c7d3c69d97038e1e9bed8a2f3472d53d80
   });
 });
